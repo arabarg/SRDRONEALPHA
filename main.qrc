@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>tabbar/calc.png</file>
+        <file>tabbar/car.png</file>
+        <file>tabbar/conf.png</file>
+        <file>tabbar/crash.png</file>
+        <file>tabbar/energy.png</file>
+        <file>tabbar/huella.png</file>
+        <file>tabbar/view.png</file>
+    </qresource>
+</RCC>
