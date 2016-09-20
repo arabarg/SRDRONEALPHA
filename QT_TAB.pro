@@ -21,3 +21,6 @@ FORMS    += tabwidget.ui
 
 RESOURCES += \
     main.qrc
+
+DISTFILES += \
+    CMakeLists.txt
