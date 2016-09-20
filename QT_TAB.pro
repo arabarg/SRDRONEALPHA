@@ -13,11 +13,14 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        tabwidget.cpp
+        tabwidget.cpp \
+    viewer.cpp
 
-HEADERS  += tabwidget.h
+HEADERS  += tabwidget.h \
+    viewer.h
 
-FORMS    += tabwidget.ui
+FORMS    += tabwidget.ui \
+    viewer.ui
 
 RESOURCES += \
     main.qrc

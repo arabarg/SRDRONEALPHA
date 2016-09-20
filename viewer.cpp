@@ -1,72 +1,78 @@
 #include "viewer.h"
-#include "ui_viewer.h"
+#include "../build/ui_viewer.h"
 
-viewer::viewer(QWidget *parent) :
+Viewer::Viewer(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::viewer),
+    ui(new Ui::Viewer),
   filtering_axis_ (1), //y
   color_mode_ (4) //rainbow
 {
 
-    ui->setupUi(this);
+  ui->setupUi(this);
 
-    cloud_.reset(new PointCloudT);
-    cloud_->resize (500);
+  cloud_.reset(new PointCloudT);
+  cloud_->resize (500);
 
-      // Fill the cloud with random points
-      for (size_t i = 0; i < cloud_->points.size (); ++i)
-      {
-        cloud_->points[i].x = 1024 * rand () / (RAND_MAX + 1.0f);
-        cloud_->points[i].y = 1024 * rand () / (RAND_MAX + 1.0f);
-        cloud_->points[i].z = 1024 * rand () / (RAND_MAX + 1.0f);
-      }
-      // Set up the QVTK window
-        viewer_.reset (new pcl::visualization::PCLVisualizer ("viewer", false));
-        viewer_->setBackgroundColor (0.1, 0.1, 0.1);
-        ui->qvtkWidget->SetRenderWindow (viewer_->getRenderWindow ());
-        viewer_->setupInteractor (ui->qvtkWidget->GetInteractor (), ui->qvtkWidget->GetRenderWindow ());
+    // Fill the cloud with random points
+    for (size_t i = 0; i < cloud_->points.size (); ++i)
+    {
+      cloud_->points[i].x = 1024 * rand () / (RAND_MAX + 1.0f);
+      cloud_->points[i].y = 1024 * rand () / (RAND_MAX + 1.0f);
+      cloud_->points[i].z = 1024 * rand () / (RAND_MAX + 1.0f);
+    }
+    // Set up the QVTK window
+      viewer_.reset (new pcl::visualization::PCLVisualizer ("viewer", false));
+      viewer_->setBackgroundColor (0.1, 0.1, 0.1);
+      ui->qvtkWidget->SetRenderWindow (viewer_->getRenderWindow ());
+      viewer_->setupInteractor (ui->qvtkWidget->GetInteractor (), ui->qvtkWidget->GetRenderWindow ());
 
-        //******************PROBANDO PCL***********************************/
+      //******************PROBANDO PCL***********************************/
 
-        //viewer_->addOrientationMarkerWidgetAxes(ui->qvtkWidget->GetInteractor());;
-
-
-        pcl::ModelCoefficients plane_coeff;
-        Eigen::Vector4f plane_parameters;
-
-        plane_coeff.values.resize (4);    // We need 4 values
-        plane_coeff.values[0] = plane_parameters.x ();
-        plane_coeff.values[1] = plane_parameters.y ();
-        plane_coeff.values[2] = plane_parameters.z ();
-        plane_coeff.values[3] = plane_parameters.w ();
-        viewer_->addPlane(plane_coeff);
+      //viewer_->addOrientationMarkerWidgetAxes(ui->qvtkWidget->GetInteractor());;
 
 
-        ui->qvtkWidget->update ();
+      pcl::ModelCoefficients plane_coeff;
+      Eigen::Vector4f plane_parameters;
 
-       // Connect "Load" and "Save" buttons and their functions
-         connect (ui->pushButton_load, SIGNAL(clicked ()), this, SLOT(loadFileButtonPressed ()));
-         connect (ui->pushButton_save, SIGNAL(clicked ()), this, SLOT(saveFileButtonPressed ()));
+      plane_coeff.values.resize (4);    // We need 4 values
+      plane_coeff.values[0] = plane_parameters.x ();
+      plane_coeff.values[1] = plane_parameters.y ();
+      plane_coeff.values[2] = plane_parameters.z ();
+      plane_coeff.values[3] = plane_parameters.w ();
+      viewer_->addPlane(plane_coeff);
 
-         // Connect X,Y,Z radio buttons and their functions
-         connect (ui->radioButton_x, SIGNAL(clicked ()), this, SLOT(axisChosen ()));
-         connect (ui->radioButton_y, SIGNAL(clicked ()), this, SLOT(axisChosen ()));
-         connect (ui->radioButton_z, SIGNAL(clicked ()), this, SLOT(axisChosen ()));
 
-         connect (ui->radioButton_BlueRed, SIGNAL(clicked ()), this, SLOT(lookUpTableChosen()));
-         connect (ui->radioButton_GreenMagenta, SIGNAL(clicked ()), this, SLOT(lookUpTableChosen()));
-         connect (ui->radioButton_WhiteRed, SIGNAL(clicked ()), this, SLOT(lookUpTableChosen()));
-         connect (ui->radioButton_GreyRed, SIGNAL(clicked ()), this, SLOT(lookUpTableChosen()));
-         connect (ui->radioButton_Rainbow, SIGNAL(clicked ()), this, SLOT(lookUpTableChosen()));
+      ui->qvtkWidget->update ();
 
-         // Color the randomly generated cloud
-         colorCloudDistances ();
-         viewer_->addPointCloud (cloud_, "cloud");
-         viewer_->resetCamera ();
-       ui->qvtkWidget->update ();
+     // Connect "Load" and "Save" buttons and their functions
+       connect (ui->pushButton_load, SIGNAL(clicked ()), this, SLOT(loadFileButtonPressed ()));
+       connect (ui->pushButton_save, SIGNAL(clicked ()), this, SLOT(saveFileButtonPressed ()));
+
+       // Connect X,Y,Z radio buttons and their functions
+       connect (ui->radioButton_x, SIGNAL(clicked ()), this, SLOT(axisChosen ()));
+       connect (ui->radioButton_y, SIGNAL(clicked ()), this, SLOT(axisChosen ()));
+       connect (ui->radioButton_z, SIGNAL(clicked ()), this, SLOT(axisChosen ()));
+
+       connect (ui->radioButton_BlueRed, SIGNAL(clicked ()), this, SLOT(lookUpTableChosen()));
+       connect (ui->radioButton_GreenMagenta, SIGNAL(clicked ()), this, SLOT(lookUpTableChosen()));
+       connect (ui->radioButton_WhiteRed, SIGNAL(clicked ()), this, SLOT(lookUpTableChosen()));
+       connect (ui->radioButton_GreyRed, SIGNAL(clicked ()), this, SLOT(lookUpTableChosen()));
+       connect (ui->radioButton_Rainbow, SIGNAL(clicked ()), this, SLOT(lookUpTableChosen()));
+
+       // Color the randomly generated cloud
+       colorCloudDistances ();
+       viewer_->addPointCloud (cloud_, "cloud");
+       viewer_->resetCamera ();
+     ui->qvtkWidget->update ();
 
 
 }
+
+
+
+
+
+
 
 void
 Viewer::loadFileButtonPressed ()
@@ -316,7 +322,8 @@ Viewer::colorCloudDistances ()
 }
 
 
-viewer::~viewer()
+
+Viewer::~Viewer()
 {
     delete ui;
 }

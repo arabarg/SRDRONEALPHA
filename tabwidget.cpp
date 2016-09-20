@@ -1,5 +1,5 @@
 #include "tabwidget.h"
-
+#include "viewer.h"
 #include "../build/ui_tabwidget.h"
 
 TabWidget::TabWidget(QWidget *parent) :
@@ -66,6 +66,11 @@ TabWidget::TabWidget(QWidget *parent) :
          viewer_->resetCamera ();
        ui->qvtkWidget->update ();
 
+
+       QVBoxLayout* layout=new QVBoxLayout();
+       Viewer* view= new Viewer();
+       layout->addWidget(view);
+       ui->tab_5->setLayout(layout);
 
 }
 

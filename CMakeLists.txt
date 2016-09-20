@@ -10,9 +10,9 @@ link_directories    (${PCL_LIBRARY_DIRS})
 add_definitions     (${PCL_DEFINITIONS})
 
 set (CMAKE_AUTORCC ON)
-set  (project_SOURCES main.cpp tabwidget.cpp )
-set  (project_HEADERS tabwidget.h )
-set  (project_FORMS   tabwidget.ui )
+set  (project_SOURCES main.cpp tabwidget.cpp viewer.cpp)
+set  (project_HEADERS tabwidget.h viewer.h)
+set  (project_FORMS   tabwidget.ui viewer.ui)
 set  (VTK_LIBRARIES   vtkRendering vtkGraphics vtkHybrid QVTK)
 
 QT4_WRAP_CPP (project_HEADERS_MOC   ${project_HEADERS})

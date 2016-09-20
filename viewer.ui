@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>viewer</class>
- <widget class="QWidget" name="viewer">
+ <class>Viewer</class>
+ <widget class="QWidget" name="Viewer">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1782</width>
-    <height>1782</height>
+    <width>1778</width>
+    <height>1676</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -264,10 +264,10 @@
   <widget class="QVTKWidget" name="qvtkWidget" native="true">
    <property name="geometry">
     <rect>
-     <x>450</x>
-     <y>-10</y>
-     <width>941</width>
-     <height>511</height>
+     <x>446</x>
+     <y>9</y>
+     <width>1311</width>
+     <height>491</height>
     </rect>
    </property>
    <property name="sizePolicy">
